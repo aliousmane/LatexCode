@@ -1,0 +1,27 @@
+\usepackage{booktabs}
+\usepackage{datatool}
+
+\DTLsetseparator{;}
+\DTLloaddb{Instance}{InstancesParam.csv}
+
+\DTLdisplaydb{Instance}
+%\DTLsort{Hits=descending}{Instance}
+\begin{table}
+\begin{center}
+\begin{tabular}{|r|r|r|}
+\hline
+\bfseries \# Customers &
+\bfseries \# Deliverymen & 
+\bfseries \# Installers %
+ \DTLforeach*{Instance}{%
+    \cust=Customers, \del=Deliverymen, \inst=Installers}
+    {%
+    \\\hline %
+   	\cust & \del & \inst  %
+   	
+   }%
+   \\\hline
+      % \\\hline\gdef\doamp{\gdef\doamp{&}}%
+	%\DTLforeachkeyinrow{\thisValue}{\doamp\thisValue}%  
+\end{tabular}
+\end{table}
